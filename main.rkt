@@ -25,3 +25,4 @@
 
 (send c set-editor text)
 (send frame show #t)
+
