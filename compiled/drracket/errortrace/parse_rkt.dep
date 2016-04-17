@@ -1,0 +1,1 @@
+("6.3" ("1f32fc87ecd75b33cbc376473fad11e52a27025a" . "995f8d8819d2ce19cb91071d244be872ab6b55ac") #"C:\\Users\\John\\Dropbox\\School\\UML Semester 6\\Organization of Programming Languages\\Sound-Editor-JohnTylerTony\\sound.rkt" (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

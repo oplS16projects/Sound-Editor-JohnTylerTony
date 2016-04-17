@@ -1,0 +1,7 @@
+#lang racket
+;; File: sound.rkt
+;; Curator: Tyler Bezuka
+;; Purpose: Sound Generator
+
+;; Includes
+(require rsound)
