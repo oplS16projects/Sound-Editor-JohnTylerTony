@@ -24,6 +24,11 @@
                               [style '(auto-hscroll auto-vscroll no-border)]))
 (define text (new text%))
 
+(define panel (new horizontal-panel% [parent frame]
+                                     [alignment '(center center)]))
+ 
+(new button% [parent panel] [label "Run"])
+
 (define mb (new menu-bar% [parent frame]))
 (define m-edit (new menu% [label "Edit"] [parent mb]))
 (define m-font (new menu% [label "Font"] [parent mb]))
