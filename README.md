@@ -33,7 +33,8 @@ Tyler will have to describe what the endpoints are for the rsound library so Joh
 ## Schedule
 
 ### First Milestone (Fri Apr 15)
-A working GUI program and some sort of syntax for our language. The sound may or may not be produced by the program.
+A working GUI program and some sort of syntax for our language hs been produced for v1.0.
+There is a basic implementation of the parser and the next milestone will include connecting the parser to the sound.rkt procedures to actually produce some sounds.
 
 ### Second Milestone (Fri Apr 22)
 Work out the kinks in the parser and GUI program, sound will be produced by this date.
