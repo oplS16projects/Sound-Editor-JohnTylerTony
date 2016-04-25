@@ -5,11 +5,9 @@
 
 ;; Includes
 (require rsound)
-
-(provide make-sound)
          
 (define (make-sound sound repeat)
-  (if (eq? sound path-string) (play-drums sound repeat)))
+  (play-drums "kick-drum"))
 ;; ^^ Needs some further reworking to integrate into parser
   
 (define (play-drums f)
