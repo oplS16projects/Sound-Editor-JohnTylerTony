@@ -5,24 +5,33 @@
 
 ;; Includes
 (require rsound)
-         
-(define (make-sound sound repeat)
-  (play-drums "kick-drum"))
-;; ^^ Needs some further reworking to integrate into parser
-  
-(define (play-drums f)
-  (if (null? f)
+
+(define (play x)
+  (play ding))
+
+(define (single-sound sound)
+  (if (null? sound)
       (play ding)
-      (cond ((eq? f 'kick-drum) (play ding))
-            ((eq? f 'hi-top) (play ding))
-            ((eq? f 'snare) (play ding))
-            ((eq? f 'nothing) (play ding)))))
+      (cond ((eq? sound 'drum1) (play ding))
+            ((eq? sound 'drum2) (play ding))
+            ((eq? sound 'drum3) (play ding))
+            ((eq? sound 'drum4) (play ding))
+            ((eq? sound 'synth1) (play ding))
+            ((eq? sound 'synth2) (play ding))
+            ((eq? sound 'synth3) (play ding))
+            ((eq? sound 'synth4) (play ding))
+            ((eq? sound 'guitar1) (play ding))
+            ((eq? sound 'guitar2) (play ding))
+            ((eq? sound 'guitar3) (play ding))
+            ((eq? sound 'guitar4) (play ding)))))
+
             
-(define (repeat-sound sound repeat)
+(define (repeat-sound sound repeat play)
   (if (eq? 0 repeat)
-      (play-drums sound)
-      ((play-drums sound) (repeat-sound sound (- 1 repeat)))))
+      (single-sound sound)
+      (repeat-sound sound (- 1 repeat) (single-sound sound))))
   
 (define (get-samples sound)
   (rs-read sound))
+
 
