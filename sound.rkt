@@ -16,7 +16,7 @@
       (cond ((eq? f 'kick-drum) (play ding))
             ((eq? f 'hi-top) (play ding))
             ((eq? f 'snare) (play ding))
-            ((eq? f 'nothing) (play ding))))))
+            ((eq? f 'nothing) (play ding)))))
             
 (define (repeat-sound sound repeat)
   (if (eq? 0 repeat)
