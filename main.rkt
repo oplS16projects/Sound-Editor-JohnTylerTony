@@ -7,6 +7,12 @@
 (require racket/gui)
 (require "parse.rkt")
 
+;; =================== Sound Parser Object from parse.rkt =======
+;; Parser Initialized
+(define sound-parser (make-parser 'test-mode))
+((sound-parser 'init) "begin")
+
+
 ;; ==========================================================
 ;; Constants
 (define WIDTH 500)
@@ -62,7 +68,8 @@
                               (+ 1 (string-length curr-line))))
                      ;; ********** THIS IS WHERE YOU GO JOHN **********
                      ;; ** RIGHT NOW IT ONLY PRINTS THE CURRENT LINE **
-                     (print curr-line)
+                     ((sound-parser 'update) curr-line) ;; update parser
+                     (print curr-line)(display "\n") ;; debug
                      ;; **************** FILL IN ABOVE ****************
                      )))]))
 
@@ -86,31 +93,3 @@
 
 ;; send 'frame', show gui
 (send frame show #t)
-
-;; =================================================================
-;; Anything below this comment is to initialize and perform parsing
-;; Parser Initialized
-(define sound-parser (make-parser 'test-mode))
-
-;; Get raw string from textbox, returns all content in text box
-(define (string-input)
-  (send text get-text))
-
-;; Populates the parser object when launched as (callback-populate)
-(define callback-populate
-  (lambda()((sound-parser 'init) (string-input))))
-
-;; Updates the parser object when launched as (callback-update)
-;;; Bug: retrieves entire textbox, not just update since last read
-(define callback-update
-  (lambda()((sound-parser 'update) (string-input))))
-
-;; Todo:
-;; 1. Provide button on editor to signal done inputting,
-;;    button should call (sound-parser 'done)
-;; 2. Provide how-to display on window showing syntax of language
-;; 3. Correct bug on (callback-update), see above
-
-;; End perform parsing
-
-
