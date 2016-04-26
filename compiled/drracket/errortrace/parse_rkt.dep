@@ -1,1 +1,0 @@
-("6.3" ("dd5aabb954b7bc839b1a174a8696ce36714a0909" . "08c88478c1328d0c5395dfd5137c5428f61d405b") #"C:\\Users\\littl\\Documents\\GitHub\\Sound-Editor-JohnTylerTony\\sound.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
