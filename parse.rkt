@@ -13,19 +13,19 @@
   ; Flag for setting mode of parser (not in use currently)
   (define mode initial)
   ; Raw input string from textbox
-  (define raw-input "")
+  (define raw-input (list "--"))
   ; Update raw input
   (define (update-raw-input value)
     (if (not done)
-        (set! raw-input (string-append raw-input value))
+        (set! raw-input (append raw-input (list value)))
         (error "Cannot update done object")))
   ; Done flag, when done the object cannot be modified
   (define done #f)
   ; Initialize the object, if done is #t, reset the object
   (define (init input)
     (if (not done)
-        (set! raw-input input)
-        (begin (set! raw-input "") (set! raw-input input) (set! done #f))))
+        (set! raw-input (list input))
+        (begin (set! raw-input (list input)) (set! done #f))))
   (define (dispatch request)
     (cond ;; Call init
           ((eq? request 'init) init)
@@ -38,6 +38,7 @@
           ;; Return the current mode of the object
           ((eq? request 'mode) mode)
           ;; Dump debug info
+          ;((eq? request 'dump) raw-input)
           ((eq? request 'debug) (begin
                                   (display "Parser mode: ")(display mode)(display "\n")
                                   (display ";; Raw input:\n")(display raw-input)
