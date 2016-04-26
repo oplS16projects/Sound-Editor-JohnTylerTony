@@ -9,8 +9,8 @@
 
 ;; ==========================================================
 ;; Constants
-(define WIDTH 800)
-(define HEIGHT 700)
+(define WIDTH 500)
+(define HEIGHT 600)
 
 (define TEXT-SIZE 18)
 (define TEXT-COLOR "GREEN")
@@ -27,6 +27,7 @@
 (define c
   (new editor-canvas%
        [parent frame]
+       [min-height 500]
        [style '(auto-hscroll auto-vscroll no-border)]))
 
 ;; define text object 'text'
@@ -67,7 +68,8 @@
 
 ;; define gui menu
 (define mb
-  (new menu-bar% [parent frame]))
+  (new menu-bar%
+       [parent frame]))
 (define m-edit
   (new menu%
        [label "Edit"]
@@ -81,7 +83,8 @@
 
 ;; set canvas 'c' of text object 'text'
 (send c set-editor text)
-;; send 'frame', show it
+
+;; send 'frame', show gui
 (send frame show #t)
 
 ;; =================================================================

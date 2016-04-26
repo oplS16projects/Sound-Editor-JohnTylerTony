@@ -1,1 +1,1 @@
-("6.3" ("7b45e1879bf314629fea82f6a8f1d31e8762806d" . "7e1fb30f044707f767e1cbf0908d9ff3bf4e7071") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"rsound" #"main.rkt"))
+("6.3" ("aec41388272884def07c8c30b6de947bf0a7a1a5" . "24cbed81a6ae6deb08734f7e17cc4110327283a7") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"rsound" #"main.rkt"))
