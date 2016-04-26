@@ -6,6 +6,7 @@
 ;; Includes
 (require rsound)
 
+;;depending on input entered from user in text editor a single sound will be played once. 
 (define (single-sound sound)
   (if (null? sound)
       (play ding)
@@ -22,11 +23,17 @@
             ((eq? sound 'clap3) (play (rs-read "https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/master/SoundSamples/Clap-3.wav")))
             ((eq? sound 'claves) (play (rs-read "https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/master/SoundSamples/Claves.wav"))))))
 
-            
+;;STILL NOT FINISHED
+;;Function repeats the selected sound for however many times the user wishes. 
 (define (repeat-sound sound repeat)
   (if (< repeat 1)
       (single-sound sound)
       (rs-append (repeat-sound sound (- repeat 1)) (single-sound sound))))
+  
+  
+;;user is able to record sound for however long they wish and play back immediately. 
+(define (record frames)
+  (play (record-sound frames)))
 
 
 
