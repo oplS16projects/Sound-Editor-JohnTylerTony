@@ -70,7 +70,7 @@
                               (+ 1 (string-length curr-line))))
                      ;; Update parser with current line
                      ((sound-parser 'update) curr-line) 
-                     ;;(print curr-line)(display "\n") ;; debug
+                     (print curr-line)(display "\n") ;; debug
                      ))
                  (sound-parser 'done))]))
 

@@ -23,13 +23,13 @@
       (set! raw-input (list "begin"))
       (set! sounds-play (list "ding"))
       (if (eqv? mode 'debug)
-          (display "\nReset event\n\n")
+          (display "\n --> Reset event\n\n")
           (display ""))))
   ; Parse sounds
   (define (parse)
     (cond
       ;; Already parsed, going to just play.
-      ((eqv? done #t)
+      ((equal? done #t)
        (map (lambda(in)(begin
                         (single-sound (string->symbol in))
                         (if (eqv? mode 'debug)
@@ -39,7 +39,8 @@
                               (display "\n"))
                             (display ""))))       
            sounds-play))
-      ((eqv? done #f)
+      ;; Not parsed, need to parse and will then play.
+      ((equal? done #f)
        (begin
          (set! done #t)
          (map (lambda(in)
@@ -51,7 +52,7 @@
                      (set! sounds-play (append sounds-play (list (cadr in)))))
                     (else
                      (if (eqv? mode 'debug)
-                         (error "invalid sound")
+                         (display "invalid sound\n")
                          (display ""))))))
               raw-input)
          (parse)))))
@@ -62,9 +63,6 @@
         (error "Cannot update done object")))
   ; Done flag, when done the object cannot be modified
   (define done #f)
-  ; Initialize the object, if done is #t, reset the object
-  (define init
-    (reset))
   ; Dispatch table
   (define (dispatch request)
     (cond ;; Call init
@@ -72,9 +70,10 @@
           ;; Update raw text string
           ((eq? request 'update) update-raw-input)
           ;; Print raw input
-          ((eq? request 'print) raw-input)
+          ((eq? request 'raw-input) raw-input)
+          ((eq? request 'sounds-play) sounds-play)
           ;; Lock the object and parse
-          ((eq? request 'done) (begin (set! done #t) (parse)))
+          ((eq? request 'done) (parse))
           ;; Repeat playing
           ;;((eq? request 'play) (if (eq? #t done)(repeat)(error "No parse")))
           ;; Return the current mode of the object
@@ -89,7 +88,3 @@
           (else (error "Unknown request: Parser" request))))
   ;; Launch the dispatch procedure
   dispatch)
-
-
-;(define test (make-parser 'test))
-;((test 'init) "johnkilgo")
