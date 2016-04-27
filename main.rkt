@@ -49,7 +49,7 @@
 (define button
   (new button%
      [parent panel]
-     [label "Run"]
+     [label "Save"]
      ;; where the magic happens
      [callback (lambda (button event)
                  ;; enclosing loop for parser
@@ -66,12 +66,21 @@
                      (set! curr-pos
                            (+ curr-pos
                               (+ 1 (string-length curr-line))))
-                     ;; ********** THIS IS WHERE YOU GO JOHN **********
-                     ;; ** RIGHT NOW IT ONLY PRINTS THE CURRENT LINE **
                      ((sound-parser 'update) curr-line) ;; update parser
                      (print curr-line)(display "\n") ;; debug
-                     ;; **************** FILL IN ABOVE ****************
                      )))]))
+
+;; define button 'button2'
+(define button2
+  (new button%
+     [parent panel]
+     [label "Run"]
+     ;; where the magic happens
+     [callback (lambda (button event)
+                 ;; enclosing loop for parser
+                 (let ()
+                   0
+                     ))]))
 
 ;; define gui menu
 (define mb
