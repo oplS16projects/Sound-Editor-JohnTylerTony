@@ -14,9 +14,12 @@ The sound editor is a text editor where a user can type several phrases, click a
 ![screenshot showing running](running.png)
 
 ##Concepts Demonstrated
-* **Data abstraction** is used to provide access to the elements of the RSS feed.
-* The objects in the OpenGL world are represented with **recursive data structures.**
-* **Symbolic language processing techniques** are used in the parser.
+* **Data abstraction** is used in the parser object in parser.rkt. Users cannot directly modify this object and must use the interfaced that is provided; the object can be locked and attempts to edit it can be locked. Calling the init function again resets the state of the object.
+* **Higher order functions like map** is used in the parser when disecting the user input and converting into playable sounds
+* **Program modularity** is demonstrated by separating each functional component of the program
+  - sound.rkt provides an interface to play sounds
+  - parser.rkt provides an interface for loading editor content and parsing it into function calls to sound.rkt
+  - main.rkt provides a gui
 
 ##External Technology and Libraries
 * rsound: [tyler write what you used here and link to it]
