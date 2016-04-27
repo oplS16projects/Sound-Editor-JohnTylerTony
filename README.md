@@ -24,10 +24,32 @@ The sound editor is a text editor where a user can type several phrases, click a
 
 ##Favorite Scheme Expressions
 ####John (team lead)
-Each team member should identify a favorite expression or procedure, written by them, and explain what it does. Why is it your favorite? What OPL philosophy does it embody?
-Remember code looks something like this:
+My favorite section is the dispatch table in [parser.rkt](https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/v.2.1/parse.rkt). 
 ```scheme
-(map (lambda (x) (foldr compose functions)) data)
+  (define (dispatch request)
+    (cond ;; Call init
+          ((eq? request 'init) init)
+          ;; Update raw text string
+          ((eq? request 'update) update-raw-input)
+          ;; Print raw input
+          ((eq? request 'print) raw-input)
+          ;; Lock the object and parse
+          ((eq? request 'done) (if (eq? #f done)(begin (set! done #t) (parse))
+                                   (error "Already parsed")))
+          ;; Repeat playing
+          ((eq? request 'play) (if (eq? #t done)(repeat)(error "No parse")))
+          ;; Return the current mode of the object
+          ((eq? request 'mode) mode)
+          ;; Dump debug info
+          ((eq? request 'dump) raw-input)
+          ((eq? request 'debug) (begin
+                                  (display "Parser mode: ")(display mode)(display "\n")
+                                  (display ";; Raw input:\n")(display raw-input)
+                                  (display "\n;; sounds-play:\n")(display sounds-play)
+                                  (display "\nInput complete? ") done))
+          (else (error "Unknown request: Parser" request))))
+  ;; Launch the dispatch procedure
+  dispatch)
 ```
 ####Tyler (rsound)
 This expression reads in a regular expression and elegantly matches it against a pre-existing hashmap....
