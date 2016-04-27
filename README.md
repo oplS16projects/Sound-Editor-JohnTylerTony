@@ -8,18 +8,18 @@ Tyler Bezuka (Sounds)
 Tony Ventura (GUI)
 
 ##Overview
-The sound editor is a text editor where a user can type several phrases, click a button, and have sounds come out of their computer. The syntax is extremely basic at this point. Please see details below.
+The sound editor is a text editor where a user can type several phrases, click a button(s), and have sounds come out of their computer. The syntax is extremely basic at this point. Please see details below.
 
 ##Screenshot
 ![screenshot showing running](running.png)
 
 ##Concepts Demonstrated
-* **Data abstraction** is used in the parser object in parser.rkt. Users cannot directly modify this object and must use the interfaced that is provided; the object can be locked and attempts to edit it can be locked. Calling the init function again resets the state of the object.
-* **Higher order functions like map** is used in the parser when disecting the user input and converting into playable sounds
+* **Data abstraction** is used in the parser object dound in parser.rkt. Users cannot directly modify this object and must use the interfaced that is provided; the object can be locked and attempts to edit it can be rejected. Calling the init function again resets the state of the object.
+* **Higher order functions like map** is used in the parser when dissecting the user input and converting into playable sounds
 * **Program modularity** is demonstrated by separating each functional component of the program
   - sound.rkt provides an interface to play sounds
   - parser.rkt provides an interface for loading editor content and parsing it into function calls to sound.rkt
-  - main.rkt provides a gui
+  - main.rkt provides a gui and is the main driver
 
 ##External Technology and Libraries
 * rsound: [tyler write what you used here and link to it]
@@ -27,9 +27,12 @@ The sound editor is a text editor where a user can type several phrases, click a
 
 ##Favorite Scheme Expressions
 ####John (team lead)
-My favorite section is the dispatch table in [parser.rkt](https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/v.2.1/parse.rkt). 
+My favorite section is the dispatch table in [parser.rkt](https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/v.2.1/parse.rkt). There are extra entries due to debugging in the intial release, but the table controls all access to the object. It was a process to arrive at this point as I started out by first trying to just get an object where I could modify the state. Then I added the ability to update the state of the object. It seemed like a good idea to also add the ability to lock the object before parsing. Resetting the object is performed by calling 'init. Though the current init function only resets the raw input and in a future release the init will also reset other mutable items within the parser object. 
+
+There are certainly improvements that can be made. Some include simplifying the interface and also offloading the functionality within the dispatch table (such as conditionals and if statements) to the functions that are called from the dispatch table.
+
 ```scheme
-  (define (dispatch request)
+  ((define (dispatch request)
     (cond ;; Call init
           ((eq? request 'init) init)
           ;; Update raw text string
