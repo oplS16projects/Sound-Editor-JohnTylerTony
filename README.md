@@ -77,7 +77,7 @@ My favorite section would have to be the button handler. This section not only u
      (label "Save")
      (callback (lambda (button event)
                  (let ((curr-line "") (curr-pos 0))
-                   (for ([i (+ 1 (send text last-line))])
+                   (for ((i (+ 1 (send text last-line))))
                      (define snip
                        (send text find-snip curr-pos 'after))
                      (set! curr-line
