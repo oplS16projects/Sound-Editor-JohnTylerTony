@@ -9,8 +9,8 @@
 
 ;; =================== Sound Parser Object from parse.rkt =======
 ;; Parser Initialized
-(define sound-parser (make-parser 'test-mode))
-((sound-parser 'init) "begin")
+(define sound-parser (make-parser 'debug))
+(sound-parser 'init)
 
 
 ;; ==========================================================
@@ -49,10 +49,12 @@
 (define button
   (new button%
      [parent panel]
-     [label "1 Save"]
+     [label "Parse and Play"]
      ;; where the magic happens
      [callback (lambda (button event)
-                 ;; enclosing loop for parser
+                 ;; Reset sound parser object for clean slate
+                 (sound-parser 'init)
+                 ;; Pass each line to the sound parser
                  (let ((curr-line "") (curr-pos 0))
                    ;; for each line in text
                    (for ([i (+ 1 (send text last-line))])
@@ -66,15 +68,17 @@
                      (set! curr-pos
                            (+ curr-pos
                               (+ 1 (string-length curr-line))))
-                     ((sound-parser 'update) curr-line) ;; update parser
-                     (print curr-line)(display "\n") ;; debug
-                     )))]))
+                     ;; Update parser with current line
+                     ((sound-parser 'update) curr-line) 
+                     ;;(print curr-line)(display "\n") ;; debug
+                     ))
+                 (sound-parser 'done))]))
 
 ;; define button 'button2'
 (define button2
   (new button%
      [parent panel]
-     [label "2 Play"]
+     [label "Repeat"]
      ;; where the magic happens
      [callback (lambda (button event)
                  ;; enclosing loop for parser
@@ -84,19 +88,19 @@
                  (sound-parser 'done))
                ]))
 
-;; define button 'button3'
-(define button3
-  (new button%
-     [parent panel]
-     [label "3 Repeat"]
-     ;; where the magic happens
-     [callback (lambda (button event)
-                 ;; enclosing loop for parser
-;                 (let ()
-;                   0
-;                     ))
-                 (sound-parser 'play))
-               ]))
+;;; define button 'button3'
+;(define button3
+;  (new button%
+;     [parent panel]
+;     [label "3 Repeat"]
+;     ;; where the magic happens
+;     [callback (lambda (button event)
+;                 ;; enclosing loop for parser
+;;                 (let ()
+;;                   0
+;;                     ))
+;                 (sound-parser 'play))
+;               ]))
 
 ;; define gui menu
 (define mb
