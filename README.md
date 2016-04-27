@@ -22,7 +22,20 @@ The sound editor is a text editor where a user can type several phrases, click a
   - main.rkt provides a gui and is the main driver
 
 ##External Technology and Libraries
-* rsound: [tyler write what you used here and link to it]
+* rsound: [RSound library](https://docs.racket-lang.org/rsound/index.html#%28def._%28%28lib._rsound%2Fmain..rkt%29._make-pstream%29%29) This library offers a numerous functions to read, write, manipulate, record and play sound. For reading in sound
+files rsound offers rs-read which reads in a single sound file if a correct file path is given and returns an rsound object.
+For playing rsounds (play ****) is used. For combining sounds when two sound bits want to be played consecutively rs-append
+rs-append is used. 
+
+```
+(define (repeat-sound sound repeat)
+  (if (< repeat 1)
+      (single-sound sound)
+      (rs-append (repeat-sound sound (- repeat 1)) (single-sound sound))))
+```
+This function, through recursion appends sounds together to allow looping, and returns them as a single rsound 
+object.
+
 * racket/gui [tony write what you used here and link to it]
 
 ##Favorite Scheme Expressions
