@@ -46,7 +46,9 @@
          (map (lambda(in)
                 (begin
                   (set! in (string-split in))
-                  (display in)(display "\n")
+                  (if (eqv? mode 'debug)
+                      (begin (display in)(display "\n"))
+                      (display ""))
                   (cond
                     ((and (pair? in) (equal? "play-sound" (car in)))
                      (set! sounds-play (append sounds-play (list (cadr in)))))
