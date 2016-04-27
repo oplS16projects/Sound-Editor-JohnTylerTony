@@ -73,9 +73,9 @@ My favorite section would have to be the button handler. This section not only u
 ```scheme
 (define button
   (new button%
-     [parent panel]
-     [label "Save"]
-     [callback (lambda (button event)
+     (parent panel)
+     (label "Save")
+     (callback (lambda (button event)
                  (let ((curr-line "") (curr-pos 0))
                    (for ([i (+ 1 (send text last-line))])
                      (define snip
@@ -86,7 +86,7 @@ My favorite section would have to be the button handler. This section not only u
                            (+ curr-pos
                               (+ 1 (string-length curr-line))))
                      ((sound-parser 'update) curr-line)
-                     )))]))
+                     ))))))
 ```
 
 #How to Download and Run
