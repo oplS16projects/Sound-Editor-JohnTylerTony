@@ -25,7 +25,7 @@ The sound editor is a text editor where a user can type several phrases, click a
 * rsound: [RSound library](https://docs.racket-lang.org/rsound/index.html#%28def._%28%28lib._rsound%2Fmain..rkt%29._make-pstream%29%29) This library offers a numerous functions to read, write, manipulate, record and play sound. For reading in sound
 files rsound offers rs-read which reads in a single sound file if a correct file path is given and returns an rsound object.
 For playing rsounds (play ****) is used. For combining sounds when two sound bits want to be played consecutively rs-append
-rs-append is used. 
+is used. 
 
 ```
 (define (repeat-sound sound repeat)
@@ -71,16 +71,23 @@ There are certainly improvements that can be made. Some include simplifying the 
   dispatch)
 ```
 ####Tyler (rsound)
-This expression reads in a regular expression and elegantly matches it against a pre-existing hashmap....
-```scheme
-(let* ((expr (convert-to-regexp (read-line my-in-port)))
-             (matches (flatten
-                       (hash-map *words*
-                                 (lambda (key value)
-                                   (if (regexp-match expr key) key '()))))))
-  matches)
-```
+[rsound.rkt](https://github.com/oplS16projects/Sound-Editor-JohnTylerTony/blob/v.2.1/rsound.rkt) This function was modified
+using the sleep function due to problems with (make-pstream). Orginially when text was entered in the gui, parsed, and 
+passed to this function, all sounds were played at once, which defeated the purpose of entering in multiple sounds at once. 
+To correct this problem the thread was stopped for .25 seconds to simulate a fluid stream of sound. Depending on the obect
+passed from the parser, a certain sound was called through rs-read and played back. 
 
+Given more time I would modify this function to put sound on a stream, which would elimiate the need for sleep to be called
+and allow for easier modification of pitch, volume, duration and playback. 
+```scheme
+(define (single-sound sound)
+  (if (null? sound)
+      (play ding)
+      (cond ((eq? sound 'drum1) (begin (play (rs-read "SoundSamples/Bamboo.wav")) (sleep .25)))
+            ((eq? sound 'drum2) (begin (play (rs-read "SoundSamples/Bass-Drum-1.wav")) (sleep .25)))
+            ((eq? sound 'drum3) (begin (play (rs-read "SoundSamples/Boom-Kick.wav")) (sleep .25)))
+            ((eq? sound 'drum4) (begin (play (rs-read "SoundSamples/Bottle.wav")) (sleep .25))))))
+```
 ####Tony (racket/gui)
 This expression reads in a regular expression and elegantly matches it against a pre-existing hashmap....
 ```scheme
