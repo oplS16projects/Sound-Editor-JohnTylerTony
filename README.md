@@ -1,4 +1,4 @@
-# FP7-webpage The Sound Edtior
+# FP7-webpage The Sound Editor
 
 ##Authors
 John Kilgo (Group Lead, Parser)
