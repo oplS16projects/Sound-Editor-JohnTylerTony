@@ -14,6 +14,26 @@
   (define mode initial)
   ; Raw input string from textbox
   (define raw-input (list "--"))
+  ; Sound list of parsed items to execute
+  (define sounds-play (list "ding"))
+  ; Parse sounds
+  (define (parse)
+    (begin
+      (map (lambda(in)
+             (begin
+               (set! in (string-split in))
+               (display in)
+               (cond
+                        ((and (pair? in) (equal? "play-sound" (car in)))
+                         (set! sounds-play (append sounds-play (list (cadr in)))))
+                        (else (print "invalid sound")))))
+           raw-input)
+      (map (lambda(in)(begin
+                        (single-sound (string->symbol in))
+                        (print in)
+                        (print "played sound")
+                        (display "\n")))
+           sounds-play)))
   ; Update raw input
   (define (update-raw-input value)
     (if (not done)
@@ -26,6 +46,7 @@
     (if (not done)
         (set! raw-input (list input))
         (begin (set! raw-input (list input)) (set! done #f))))
+  
   (define (dispatch request)
     (cond ;; Call init
           ((eq? request 'init) init)
@@ -33,16 +54,16 @@
           ((eq? request 'update) update-raw-input)
           ;; Print raw input
           ((eq? request 'print) raw-input)
-          ;; Lock the object
-          ((eq? request 'done) (set! done #t))
+          ;; Lock the object and parse
+          ((eq? request 'done) (begin (set! done #t) (parse)))
           ;; Return the current mode of the object
           ((eq? request 'mode) mode)
           ;; Dump debug info
-          ;((eq? request 'dump) raw-input)
+          ((eq? request 'dump) raw-input)
           ((eq? request 'debug) (begin
                                   (display "Parser mode: ")(display mode)(display "\n")
                                   (display ";; Raw input:\n")(display raw-input)
-                                  (display ";; End raw input")
+                                  (display "\n;; sounds-play:\n")(display sounds-play)
                                   (display "\nInput complete? ") done))
           (else (error "Unknown request: Parser" request))))
   ;; Launch the dispatch procedure

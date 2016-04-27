@@ -6,6 +6,11 @@
 ;; Includes
 (require rsound)
 
+(provide valid-list)
+(provide single-sound)
+(provide repeat-sound)
+(provide record)
+
 (define valid-list
   (list "drum1" "drum2" "drum3" "drum4"
         "synth1" "synth2" "synth3" "synth4"
