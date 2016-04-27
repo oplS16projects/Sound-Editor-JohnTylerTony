@@ -49,7 +49,7 @@
 (define button
   (new button%
      [parent panel]
-     [label "Save"]
+     [label "1 Save"]
      ;; where the magic happens
      [callback (lambda (button event)
                  ;; enclosing loop for parser
@@ -74,13 +74,29 @@
 (define button2
   (new button%
      [parent panel]
-     [label "Run"]
+     [label "2 Play"]
      ;; where the magic happens
      [callback (lambda (button event)
                  ;; enclosing loop for parser
-                 (let ()
-                   0
-                     ))]))
+;                 (let ()
+;                   0
+;                     ))
+                 (sound-parser 'done))
+               ]))
+
+;; define button 'button3'
+(define button3
+  (new button%
+     [parent panel]
+     [label "3 Repeat"]
+     ;; where the magic happens
+     [callback (lambda (button event)
+                 ;; enclosing loop for parser
+;                 (let ()
+;                   0
+;                     ))
+                 (sound-parser 'play))
+               ]))
 
 ;; define gui menu
 (define mb

@@ -34,6 +34,13 @@
                         (print "played sound")
                         (display "\n")))
            sounds-play)))
+  (define (repeat)
+    (map (lambda(in)(begin
+                        (single-sound (string->symbol in))
+                        (print in)
+                        (print "played sound")
+                        (display "\n")))
+           sounds-play))
   ; Update raw input
   (define (update-raw-input value)
     (if (not done)
@@ -55,7 +62,10 @@
           ;; Print raw input
           ((eq? request 'print) raw-input)
           ;; Lock the object and parse
-          ((eq? request 'done) (begin (set! done #t) (parse)))
+          ((eq? request 'done) (if (eq? #f done)(begin (set! done #t) (parse))
+                                   (error "Already parsed")))
+          ;; Repeat playing
+          ((eq? request 'play) (if (eq? #t done)(repeat)(error "No parse")))
           ;; Return the current mode of the object
           ((eq? request 'mode) mode)
           ;; Dump debug info
