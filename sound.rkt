@@ -46,9 +46,20 @@
       (rs-append (repeat-sound sound (- repeat 1)) (single-sound sound))))
   
   
-;;user is able to record sound for however long they wish and play back immediately. 
+;;user is able to record sound for however long they wish and play back immediately.  
 (define (record frames)
   (play (record-sound frames)))
+  
+  
+  ;;this function is not implemented in the gui, but takes a list of rsound obects as well as an initial sound
+  ;;and iterates through the list appending the ding sound with the next sound in the list. Once the final sound is reached
+  ;;the final sound is played and the function exits. 
+  (define (make-song lst initial)
+    (define (make-song-helper lst sound)
+      (if (null? (car lst))
+                 (play sound)
+                 (make-song-helper (cdr lst) (rs-append ding (rs-read (car sound))))))
+  (make-song-helper lst initial))
 
 
 
